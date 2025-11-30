@@ -30,11 +30,12 @@ public class Main {
         System.out.println("Starting with: " + numberOfThreads + " calculating threads");
         int MAX_QUEUE_CAPACITY = 20;
         ResourceQueue resourceQueue = new ResourceQueue(MAX_QUEUE_CAPACITY);
+        ResourceQueue resultQueue = new ResourceQueue(MAX_QUEUE_CAPACITY * numberOfThreads);
 
         // Create Calculator threads
         List<Calculator> calculators = new ArrayList<>();
         for(int i = 0; i < numberOfThreads; i++) {
-            Calculator calculator = new Calculator(resourceQueue);
+            Calculator calculator = new Calculator(resourceQueue, resultQueue, "Calculator nr. " + (i + 1));
             Thread calculatorThread = new Thread(calculator);
             calculatorThread.start();
             calculators.add(calculator);
@@ -45,7 +46,11 @@ public class Main {
         inserterThread.start();
 
         inserterThread.join();
+
         // Stop threads
+        for (Resource resource : resultQueue.getQueue()){
+            System.out.println(resource.getValue());
+        }
         calculators.forEach(Calculator::stop);
     }
 }

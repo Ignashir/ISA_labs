@@ -1,8 +1,11 @@
 package org.example;
 
+import lombok.Getter;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
+@Getter
 public class ResourceQueue {
     private final Queue<Resource> queue = new LinkedList<>();
     private final int maxSize;

@@ -51,6 +51,7 @@ public class Inserter implements Runnable{
     }
 
     public void stop() {
+        System.out.println("Stopping Inserter");
         running = false;
         resourceQueue.notifyIsNotFull();
     }

@@ -2,10 +2,14 @@ package org.example;
 
 public class Calculator implements Runnable {
     private final ResourceQueue resourceQueue;
+    private final ResourceQueue resultQueue;
     private boolean running = false;
+    private final String name;
 
-    public Calculator(ResourceQueue resourceQueue) {
+    public Calculator(ResourceQueue resourceQueue, ResourceQueue resultQueue, String name) {
         this.resourceQueue = resourceQueue;
+        this.resultQueue = resultQueue;
+        this.name = name;
     }
 
     @Override
@@ -40,10 +44,13 @@ public class Calculator implements Runnable {
 
     private void calculate(Resource resource) throws InterruptedException {
         System.out.println("Calculating " + resource.getValue());
+        int result = Integer.parseInt(resource.getValue()) * 10;
+        resultQueue.add(new Resource("[" + this.name + "]" + "Result of " + resource.getValue() + " is " + result));
         Thread.sleep(5000);
     }
 
     public void stop() {
+        System.out.println("Stopping Calculator : " + this.name);
         running = false;
         resourceQueue.notifyIsNotEmpty();
     }
