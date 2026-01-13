@@ -1,0 +1,98 @@
+### ===============================
+### PARENTS
+### ===============================
+
+### Create parent
+POST http://localhost:8080/parents
+Content-Type: application/json
+
+{
+  "name": "Smith"
+}
+
+###
+
+### Create another parent
+POST http://localhost:8080/parents
+Content-Type: application/json
+
+{
+  "name": "Johnson"
+}
+
+###
+
+### Get all parents (collection read)
+GET http://localhost:8080/parents
+
+###
+
+### Get single parent by ID
+GET http://localhost:8080/parents/29ffaf54-e72a-4ab3-994c-8ed37b1056c7
+
+###
+
+### Update parent
+PUT http://localhost:8080/parents/799a0f3d-bac0-4007-8a9b-1bfce3b25f6c
+Content-Type: application/json
+
+{
+  "name": "Smith Updated"
+}
+
+###
+
+### Delete parent (cascade deletes children)
+DELETE http://localhost:8080/parents/29ffaf54-e72a-4ab3-994c-8ed37b1056c7
+
+###
+
+### Delete non-existent parent
+DELETE http://localhost:8080/parents/00000000-0000-0000-0000-000000000000
+
+###
+
+### Create child for parent
+POST http://localhost:8080/parents/0ce135ba-6567-4f71-815f-7e3c3a825d3f/children
+Content-Type: application/json
+
+{
+  "name": "John"
+}
+
+###
+
+### Create another child for parent
+POST http://localhost:8080/parents/0ce135ba-6567-4f71-815f-7e3c3a825d3f/children
+Content-Type: application/json
+
+{
+  "name": "Emma"
+}
+
+###
+
+### Get all children of parent
+GET http://localhost:8080/parents/0ce135ba-6567-4f71-815f-7e3c3a825d3f/children
+
+###
+
+### Get single child of parent
+GET http://localhost:8080/parents/2b6da6a7-f2af-4ddd-a547-051e08760c28/children/42e3139e-77bd-43c3-9c2c-8614da713376
+
+###
+
+### Update child
+PUT http://localhost:8080/parents/0ce135ba-6567-4f71-815f-7e3c3a825d3f/children/42e3139e-77bd-43c3-9c2c-8614da713376
+Content-Type: application/json
+
+{
+  "name": "John Updated"
+}
+
+###
+
+### Delete child
+DELETE http://localhost:8080/parents/0ce135ba-6567-4f71-815f-7e3c3a825d3f/children/42e3139e-77bd-43c3-9c2c-8614da713376
+
+###

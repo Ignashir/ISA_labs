@@ -3,11 +3,13 @@ package com.example.lab_4;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @ToString
@@ -20,7 +22,7 @@ public class Parent {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Child> children = new ArrayList<>();
 
